@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>bda759ed-f5fd-44b0-97e9-2b25e5f860f7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>src\test.py</StartupFile>
+    <StartupFile>src\add-two-numbers.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,7 +24,7 @@
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\test.py" />
+    <Compile Include="src\add-two-numbers.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
