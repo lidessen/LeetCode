@@ -5,29 +5,19 @@
 #         self.next = None
 
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def addTwoNumbers(self, l1, l2):
         result = ListNode(0)
-        start = self.add(result, l1, l2)
-        
-        while(l1.next is not None or l2.next is not None):
-            if(l1.next is None):
-                l1.val = 0
-            else:
-                l1 = l1.next
-            if(l2.next is None):
-                l2.val = 0
-            else:
-                l2 = l2.next
-            start = self.add(start, l1, l2)
-        return result
-    
-    def add(self, pre, l1, l2):
-        val = l1.val + l2.val + pre.val
-        if(val <= 9):
-            pre.val = val
-            if(l1.next is not None or l2.next is not None):
-                pre.next = ListNode(0)
-        else:
-            pre.val = val - 10
-            pre.next = ListNode(1)
-        return pre.next
+        cursor=result
+        carry=0
+        while(l1 or l2):
+            x= l1.val if l1 else 0
+            y= l2.val if l2 else 0
+            val=carry+x+y
+            carry=val//10
+            cursor.next=ListNode(val%10)
+            cursor=cursor.next
+            if(l1!=None):l1=l1.next
+            if(l2!=None):l2=l2.next
+        if(carry>0):
+            cursor.next=ListNode(1)
+        return result.next
