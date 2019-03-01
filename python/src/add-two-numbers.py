@@ -6,26 +6,28 @@
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        a = str(l1.val)
-        b = str(l2.val)
+        result = ListNode(0)
+        start = self.add(result, l1, l2)
+        
         while(l1.next is not None or l2.next is not None):
             if(l1.next is None):
-                l1.val = ''
+                l1.val = 0
             else:
                 l1 = l1.next
             if(l2.next is None):
-                l2.val = ''
+                l2.val = 0
             else:
                 l2 = l2.next
-            a = str(l1.val) + a
-            b = str(l2.val) + b
-        result = int(a) + int(b)
-        resultList = ListNode(None)
-        start = resultList
-        for n in str(result)[::-1]:
-            if start.val is not None:
-                start.next = ListNode(int(n))
-                start = start.next
-            else:
-                start.val = int(n)
-        return resultList
+            start = self.add(start, l1, l2)
+        return result
+    
+    def add(self, pre, l1, l2):
+        val = l1.val + l2.val + pre.val
+        if(val <= 9):
+            pre.val = val
+            if(l1.next is not None or l2.next is not None):
+                pre.next = ListNode(0)
+        else:
+            pre.val = val - 10
+            pre.next = ListNode(1)
+        return pre.next
