@@ -75,5 +75,3 @@ var longestPalindrome = function(s) {
   return str;
 };
 // @lc code=end
-
-longestPalindrome('123454321');
