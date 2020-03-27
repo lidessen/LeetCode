@@ -36,42 +36,45 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
-  if (s.length <= 1) {
-    return s;
-  }
-  const startCursors = [];
-  let cursor = 1;
-  for (cursor; cursor < s.length; cursor++) {
-    startCursors.push({
-      start: cursor,
-      end: cursor
-    });
-    for (let item of startCursors) {
-      if (item.end !== cursor) continue;
-      if (item.start === cursor) {
-        if (s[item.start - 1] !== s[cursor]) {
-          item.start--;
-        }
-      }
-      if (s[item.start - 1] === s[cursor]) {
-        item.start--;
-        item.end++;
-      }
-    }
-  }
-  let length = 0;
+  const strs = [];
   let str = '';
-  for (const item of startCursors) {
-    const len = item.end - item.start;
-    if (len > 1) {
-      const text = s.slice(item.start, item.end);
-      console.log(text);
-      if (len > length) {
-        str = text;
-        length = len;
+  for (let i = 0; i < s.length; i++) {
+    let left = i;
+    let right = i;
+    if (left - 1 >= 0 && right + 1 < s.length && s[left - 1] === s[right + 1]) {
+      const tempStr = find(s, left - 1, right + 1);
+      if (tempStr.length > str.length) {
+        str = tempStr;
+        strs.push(tempStr);
       }
     }
+    if (left - 1 >= 0 && s[left - 1] === s[right]) {
+      const tempStr = find(s, left - 1, right);
+      if (tempStr.length > str.length) {
+        str = tempStr;
+        strs.push(tempStr);
+      }
+      continue;
+    }
+    strs.push(s[i]);
+    if (str.length < 1) {
+      str = s[i];
+    }
   }
+  console.log(strs);
   return str;
 };
+
+function find(s, left, right) {
+  while (left >= 1 && right < s.length - 1) {
+    if (s[left - 1] === s[right + 1]) {
+      left--;
+      right++;
+      continue;
+    }
+    break;
+  }
+  return s.slice(left, right + 1);
+}
 // @lc code=end
+longestPalindrome('a');
