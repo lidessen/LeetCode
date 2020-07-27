@@ -1,4 +1,17 @@
 {
-    "python.formatting.provider": "yapf",
-    "python.pythonPath": "C:\\Users\\ztyto\\Miniconda3\\python.exe"
+  "python.formatting.provider": "yapf",
+  "python.pythonPath": "C:\\Users\\ztyto\\Miniconda3\\python.exe",
+  "dotnet-interactive.kernelTransportArgs": [
+    "{dotnet_path}",
+    "tool",
+    "run",
+    "dotnet-interactive",
+    "--",
+    "[vscode]",
+    "stdio",
+    "--http-port-range",
+    "1000-3000",
+    "--working-dir",
+    "{working_dir}"
+  ]
 }
