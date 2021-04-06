@@ -1,5 +1,5 @@
 function threeSum(nums: number[]): number[][] {
-  nums.sort();
+  nums.sort((a, b) => a - b);
   return nSum(nums, 3, 0);
 }
 
@@ -49,16 +49,26 @@ function twoSum(
   target: number,
   { start, end }: PosRange = { start: 0, end: nums.length - 1 }
 ): number[][] {
-  const record = new Map();
   const result: number[][] = [];
-  for (let i = start; i <= end; i++) {
-    if (record.has(nums[i])) {
-      if (i > start && nums[i] === nums[i - 1]) {
-        continue;
-      }
-      result.push([nums[record.get(nums[i])], nums[i]]);
+
+  let i = start;
+
+  while (i < end) {
+    if (i > start && nums[i] === nums[i - 1]) {
+      i++;
+      continue;
     }
-    record.set(target - nums[i], i);
+    let j = end;
+
+    while (nums[i] + nums[j] > target && j > i + 1) {
+      j--;
+    }
+
+    if (nums[i] + nums[j] === target) {
+      result.push([nums[i], nums[j]]);
+    }
+    i++;
   }
+
   return result;
 }
